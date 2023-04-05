@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock Assignment.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-200">
+    
+    <div class="container box-content w-64 p-4 mt-10 text-center rounded-xl  mx-auto bg-gradient-to-t from-blue-800 to-blue-500 border-blue-400 shadow-2xl border-2">
+       <div class="py-3">
+        <div class="time text-2xl font-bold text-white"></div>
+        <div class="date text-xl text-white"></div>
+       </div>
+    </div>  
+
+
+    <script>
+       const time = () => {
+    const date = new Date();
+
+        // Get All Dom Elements
+        let timeElement = document.querySelector('.time');
+        
+        // Time
+        let hours = date.getHours();
+        let minute = date.getMinutes();
+        let second = date.getSeconds();
+
+        // Adding 0 if mintue and second is in signle value (less then 10)
+        minute = (minute < 10 ? "0" : "") + minute;
+        second = (second < 10 ? "0" : "") + second;
+
+        //  AM OR PM 
+        const amOrPm = hours > 12 ? "PM" : "AM";
+
+        // Format the hour 
+        hours = hours > 12 ? hours - 12 : hours;
+
+        timeElement.innerHTML = `${hours} : ${minute} : ${second} ${amOrPm}`;
+}
+
+const date = () => {
+    let dateElement = document.querySelector('.date');
+
+
+    // Month and weekday Name Array
+    const monthName = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+    const date = new Date();
+
+
+    // Date 
+    const todayDate = date.getDate();
+    const currentMonth = monthName[date.getMonth()];
+    const currentYear = date.getFullYear();
+    const todayName = weekday[date.getDay()];
+
+
+    dateElement.innerHTML = `${todayName} , ${todayDate}  ${currentMonth} ${currentYear}`;
+
+}
+
+date();
+time();
+
+setInterval(time, 1000);
+    </script>
+</body>
+</html>
